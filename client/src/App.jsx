@@ -15,7 +15,6 @@ import RgisterForm from "./pages/RgisterForm/RgisterForm";
 
 const AuthWrapper = ({ setAuth }) => {
   const navigate = useNavigate();
-
   async function checkuser() {
     const token = localStorage.getItem("token");
     try {
