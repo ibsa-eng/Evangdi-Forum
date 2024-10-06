@@ -15,7 +15,7 @@ function RgisterForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const username = firstNameDom.current.value;
+    const username = userNameDom.current.value;
     const firstName = firstNameDom.current.value;
     const secondName = lastNameDom.current.value;
     const email = emailDom.current.value;
@@ -39,7 +39,7 @@ function RgisterForm() {
       navigate("/");
     } catch (error) {
       alert("Something went wrong");
-      console.log(error.stack);
+      console.log(error);
     }
   };
   return (
@@ -51,11 +51,12 @@ function RgisterForm() {
         </p>
         <form onSubmit={handleSubmit}>
           <input
-            ref={emailDom}
-            type="email"
-            placeholder="Email address"
+            ref={userNameDom}
+            type="text"
+            placeholder="username"
             required
           />
+
           <div className={classes.flname}>
             <input
               ref={firstNameDom}
@@ -63,6 +64,7 @@ function RgisterForm() {
               placeholder="First name"
               required
             />
+
             <input
               ref={lastNameDom}
               type="text"
@@ -71,11 +73,19 @@ function RgisterForm() {
             />
           </div>
           <input
+            ref={emailDom}
+            type="email"
+            placeholder="Email address"
+            required
+          />
+
+          <input
             ref={passwordDom}
             type="password"
             placeholder="Password"
             required
           />
+
           <label>
             <input type="checkbox" required /> I agree to the
             <a href="#"> privacy policy</a> and

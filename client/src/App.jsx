@@ -15,6 +15,8 @@ import RgisterForm from "./pages/RgisterForm/RgisterForm";
 
 const AuthWrapper = ({ setAuth }) => {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
   async function checkuser() {
     const token = localStorage.getItem("token");
     try {
@@ -24,9 +26,9 @@ const AuthWrapper = ({ setAuth }) => {
         },
       });
       console.log("User data:", data);
-      setuser(data);
+      setUser(data);
     } catch (err) {
-      console.log(err.response);
+      console.log(err);
       if (err.response?.status === 401) navigate("/login");
     }
   }
