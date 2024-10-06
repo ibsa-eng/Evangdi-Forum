@@ -15,7 +15,7 @@ function RgisterForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const username = userNameDom.current.value;
+    const username = firstNameDom.current.value;
     const firstName = firstNameDom.current.value;
     const secondName = lastNameDom.current.value;
     const email = emailDom.current.value;
@@ -50,13 +50,12 @@ function RgisterForm() {
           Already have an account? <Link to={"/login"}>Sign in</Link>
         </p>
         <form onSubmit={handleSubmit}>
-        <input
-              ref={userNameDom}
-              type="text"
-              placeholder="username"
-              required
-            />
-        
+          <input
+            ref={emailDom}
+            type="email"
+            placeholder="Email address"
+            required
+          />
           <div className={classes.flname}>
             <input
               ref={firstNameDom}
@@ -71,12 +70,6 @@ function RgisterForm() {
               required
             />
           </div>
-          <input
-            ref={emailDom}
-            type="email"
-            placeholder="Email address"
-            required
-          />
           <input
             ref={passwordDom}
             type="password"
