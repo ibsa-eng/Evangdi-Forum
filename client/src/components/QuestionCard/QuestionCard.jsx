@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import classes from "./QuestionCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
@@ -6,7 +7,26 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import items from "./mockData";
 
 function QuestionCard() {
+  // To store the user input
+  const [searchTerm, setSearchTerm] = useState("");
+  // To store the filtered list
+  const [filteredItems, setFilteredItems] = useState([]);
+
+  // Function to handle input change
+  const handleSearch = (e) => {
+    const text = e.target.value.toLowerCase();
+    setSearchTerm(text); // Update the search term
+  };
+
+  // Effect to filter items based on search term
+  useEffect(() => {
+    const updatedItems = items.filter((item) => {
+      return item.text.toLowerCase().includes(searchTerm); // Filter by search term
+    });
+    setFilteredItems(updatedItems); // Update the filtered list
+  }, [searchTerm]);
   return (
+
     // ITEM WILL BE REPLACED BY THE DATA FROM DB
     <div className={classes.page__container}>
       <div className={classes.question__header}>
@@ -25,7 +45,7 @@ function QuestionCard() {
         />
       </div>
       {/* Question lists */}
-      {items.map((item) => {
+      {(filteredItems || items).map((item) => {
         return (
           <div className={classes.question__container}>
             <div className={classes.user__and__question}>
