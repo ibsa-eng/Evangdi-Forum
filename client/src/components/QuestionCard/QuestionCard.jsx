@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import classes from "./QuestionCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
@@ -25,6 +26,8 @@ function QuestionCard() {
     setFilteredItems(updatedItems); // Update the filtered list
   }, [searchTerm]);
   return (
+
+    // ITEM WILL BE REPLACED BY THE DATA FROM DB
     <div className={classes.page__container}>
       <div className={classes.question__header}>
         <button className={classes.ask__button}>Ask Question</button>
