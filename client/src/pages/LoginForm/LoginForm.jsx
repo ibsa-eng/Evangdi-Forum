@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import classes from "./LoginForm.module.css";
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,11 +9,11 @@ function LoginForm() {
   const navigate = useNavigate();
   const emailDom = useRef();
   const passwordDom = useRef();
-  useEffect(()=>{
-    if(localStorage.getItem("token")){
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
       navigate("/");
     }
-  }, [])
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
