@@ -15,6 +15,10 @@ header {
   box-shadow: 0 2px 4px rgba(81, 107, 152, 0.16);
   background-color: #fff;
   padding: 20px 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
 }
 
 .header__container {
@@ -45,6 +49,14 @@ header {
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.log__out {
+  color: rgb(65, 28, 1);
+  font-size: 20px;
+  font-weight: bolder;
+  cursor: pointer;
+  padding: 10px 0;
 }
 
 .header__links .join_btn:hover {

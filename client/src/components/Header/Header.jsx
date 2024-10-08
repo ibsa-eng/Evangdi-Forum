@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import classes from "./Header.module.css";
 import headerLogo from "../../assets/evangadi.png";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Header() {
+  const userExist = localStorage.getItem("user");
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
   return (
     <header>
       <div className={classes.header__container}>
@@ -13,11 +19,15 @@ function Header() {
           </a>
         </div>
         <div className={classes.header__links}>
-          <a href="#">Home</a>
+          <Link to={"/"}>Home</Link>
           <a href="#">How it works</a>
-          <Link to="/login" className={classes.join_btn}>
-            Sign in
-          </Link>
+          {userExist ? (
+            <div className={classes.log__out} onClick={handleLogout}>
+              Log Out
+            </div>
+          ) : (
+            <div className={classes.join_btn}>Sign In</div>
+          )}
         </div>
       </div>
     </header>

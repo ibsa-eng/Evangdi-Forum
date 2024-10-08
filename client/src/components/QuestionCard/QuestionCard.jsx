@@ -1,21 +1,31 @@
 import React, { useState, useEffect } from "react";
-
 import classes from "./QuestionCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import items from "./mockData";
+import { useNavigate } from "react-router-dom";
 
 function QuestionCard() {
   // To store the user input
   const [searchTerm, setSearchTerm] = useState("");
   // To store the filtered list
   const [filteredItems, setFilteredItems] = useState([]);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
 
   // Function to handle input change
   const handleSearch = (e) => {
     const text = e.target.value.toLowerCase();
     setSearchTerm(text); // Update the search term
+  };
+
+  const toAskQuestion = () => {
+    navigate("/question");
+  };
+
+  const toAnswers = () => {
+    navigate("/answer");
   };
 
   // Effect to filter items based on search term
@@ -26,13 +36,13 @@ function QuestionCard() {
     setFilteredItems(updatedItems); // Update the filtered list
   }, [searchTerm]);
   return (
-
-    // ITEM WILL BE REPLACED BY THE DATA FROM DB
     <div className={classes.page__container}>
       <div className={classes.question__header}>
-        <button className={classes.ask__button}>Ask Question</button>
+        <button onClick={toAskQuestion} className={classes.ask__button}>
+          Ask Question
+        </button>
         <p className={classes.welcome__text}>
-          Welcome: <span className={classes.username}>Mikiyas</span>
+          Welcome: <span className={classes.username}>{user.username}</span>
         </p>
       </div>
 
@@ -47,7 +57,11 @@ function QuestionCard() {
       {/* Question lists */}
       {(filteredItems || items).map((item) => {
         return (
-          <div className={classes.question__container}>
+          <div
+            onClick={toAnswers}
+            key={item.id}
+            className={classes.question__container}
+          >
             <div className={classes.user__and__question}>
               <div className={classes.user__info}>
                 <div className={classes.user__icon}>

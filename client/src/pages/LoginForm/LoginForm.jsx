@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import classes from "./LoginForm.module.css";
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -31,8 +31,12 @@ function LoginForm() {
         password: password,
       });
       alert("Login Successfully!");
-      //   console.log(data);
+      const user = {
+        username: data.username,
+        userid: data.userId,
+      };
       localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(user));
       navigate("/");
     } catch (error) {
       alert("Something went wrong");
