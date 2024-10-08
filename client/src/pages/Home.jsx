@@ -1,7 +1,12 @@
 import React from "react";
+import QuestionCard from "../components/QuestionCard/QuestionCard";
 
 function Home() {
-  return <div style={{ height: "73vh" }}>Home</div>;
+  return (
+    <>
+      <QuestionCard />
+    </>
+  );
 }
 
 export default Home;

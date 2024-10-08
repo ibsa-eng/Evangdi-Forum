@@ -36,7 +36,7 @@ function RgisterForm() {
         password: password,
       });
       alert("Registered Successfully!");
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       alert("Something went wrong");
       console.log(error);

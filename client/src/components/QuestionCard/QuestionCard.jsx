@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import classes from "./QuestionCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
@@ -11,6 +10,7 @@ function QuestionCard() {
   const [searchTerm, setSearchTerm] = useState("");
   // To store the filtered list
   const [filteredItems, setFilteredItems] = useState([]);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   // Function to handle input change
   const handleSearch = (e) => {
@@ -26,13 +26,11 @@ function QuestionCard() {
     setFilteredItems(updatedItems); // Update the filtered list
   }, [searchTerm]);
   return (
-
-    // ITEM WILL BE REPLACED BY THE DATA FROM DB
     <div className={classes.page__container}>
       <div className={classes.question__header}>
         <button className={classes.ask__button}>Ask Question</button>
         <p className={classes.welcome__text}>
-          Welcome: <span className={classes.username}>Mikiyas</span>
+          Welcome: <span className={classes.username}>{user.username}</span>
         </p>
       </div>
 
@@ -47,7 +45,7 @@ function QuestionCard() {
       {/* Question lists */}
       {(filteredItems || items).map((item) => {
         return (
-          <div className={classes.question__container}>
+          <div key={item.id} className={classes.question__container}>
             <div className={classes.user__and__question}>
               <div className={classes.user__info}>
                 <div className={classes.user__icon}>

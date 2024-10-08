@@ -34,27 +34,6 @@ const AuthWrapper = ({ setAuth }) => {
   }
 
   useEffect(() => {
-    // const checkToken = async () => {
-    //   const token = localStorage.getItem("token");
-    //   if (!token) {
-    //     setAuth(false); // No token, user is not authenticated
-    //     navigate("/login");
-    //     return;
-    //   }
-    //   try {
-    //     // Send token to the server for validation
-    //     await axiosInstance.get("/users/check", {
-    //       headers: { Authorization: `Bearer ${token}` },
-    //     });
-    //     setAuth(true); // Token is valid, user is authenticated
-    //   } catch (error) {
-    //     console.error("Token validation failed", error);
-    //     setAuth(false); // Invalid token, user is not authenticated
-    //     localStorage.removeItem("token"); // Remove invalid token
-    //     navigate("/login"); // Redirect to login
-    //   }
-    // };
-    // checkToken();
     checkuser();
   }, []);
 
