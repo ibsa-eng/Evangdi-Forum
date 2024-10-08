@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import items from "./mockData";
+import { useNavigate } from "react-router-dom";
 
 function QuestionCard() {
   // To store the user input
@@ -11,11 +12,20 @@ function QuestionCard() {
   // To store the filtered list
   const [filteredItems, setFilteredItems] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
 
   // Function to handle input change
   const handleSearch = (e) => {
     const text = e.target.value.toLowerCase();
     setSearchTerm(text); // Update the search term
+  };
+
+  const toAskQuestion = () => {
+    navigate("/question");
+  };
+
+  const toAnswers = () => {
+    navigate("/answer");
   };
 
   // Effect to filter items based on search term
@@ -28,7 +38,9 @@ function QuestionCard() {
   return (
     <div className={classes.page__container}>
       <div className={classes.question__header}>
-        <button className={classes.ask__button}>Ask Question</button>
+        <button onClick={toAskQuestion} className={classes.ask__button}>
+          Ask Question
+        </button>
         <p className={classes.welcome__text}>
           Welcome: <span className={classes.username}>{user.username}</span>
         </p>
@@ -45,7 +57,11 @@ function QuestionCard() {
       {/* Question lists */}
       {(filteredItems || items).map((item) => {
         return (
-          <div key={item.id} className={classes.question__container}>
+          <div
+            onClick={toAnswers}
+            key={item.id}
+            className={classes.question__container}
+          >
             <div className={classes.user__and__question}>
               <div className={classes.user__info}>
                 <div className={classes.user__icon}>

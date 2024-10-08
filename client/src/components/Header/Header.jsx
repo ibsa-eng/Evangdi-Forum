@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./Header.module.css";
 import headerLogo from "../../assets/evangadi.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Header() {
   const userExist = localStorage.getItem("user");
@@ -19,7 +19,7 @@ function Header() {
           </a>
         </div>
         <div className={classes.header__links}>
-          <a href="#">Home</a>
+          <Link to={"/"}>Home</Link>
           <a href="#">How it works</a>
           {userExist ? (
             <div className={classes.log__out} onClick={handleLogout}>
