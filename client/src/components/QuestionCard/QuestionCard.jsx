@@ -42,7 +42,7 @@ function QuestionCard() {
           Ask Question
         </button>
         <p className={classes.welcome__text}>
-          Welcome: <span className={classes.username}>{user.username}</span>
+          Welcome: <span className={classes.username}>{user?.username}</span>
         </p>
       </div>
 
