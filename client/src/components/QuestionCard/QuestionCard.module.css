@@ -2,7 +2,7 @@
 
 .page__container {
   width: 70%;
-  margin: 8% auto 20px auto;
+  margin: 120px auto 20px auto;
   min-height: 70vh;
 }
 
@@ -11,6 +11,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  /* width: 100%; */
 }
 
 .ask__button {
@@ -60,14 +61,17 @@
   align-items: center;
   flex-wrap: wrap;
   padding: 15px;
-  background-color: transparent; /* Default container background */
+  background-color: transparent;
+  /* Default container background */
   border-top: 1px solid #e0e0e0;
-  transition: background-color 0.3s ease; /* Smooth transition */
+  transition: background-color 0.3s ease;
+  /* Smooth transition */
   cursor: pointer;
 }
 
 .question__container:hover {
-  background-color: #f5f5f5; /* Background color on hover */
+  background-color: #f5f5f5;
+  /* Background color on hover */
 }
 
 .user__and__question {
@@ -115,7 +119,8 @@
 
 .user__email {
   font-size: 14px;
-  color: #022553; /* Default email color */
+  color: #022553;
+  /* Default email color */
   font-style: italic;
   margin-top: 15px;
 }
@@ -123,15 +128,31 @@
 .user__question {
   font-size: 16px;
   font-weight: bold;
-  color: #022553; /* Default question color */
+  color: #022553;
+  /* Default question color */
 }
 
 .bold__arrow {
   font-size: 34px;
-  color: #022553; /* Default arrow color */
+  color: #022553;
+  position: absolute;
+  /* Default arrow color */
   transition: transform 0.3s ease;
 }
 
 .question__container:hover .bold__arrow {
   transform: translateX(15px);
+}
+
+@media (max-width: 765px) {
+  .question__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .user__and__question {
+    flex-direction: column;
+  }
+
 }
