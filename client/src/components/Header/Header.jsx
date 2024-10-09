@@ -54,6 +54,7 @@ function Header() {
               size={30}
             />
           </div>
+          {/* dropdown content start here */}
           <div className={classes.dropdown_content}>
             <a href="#">Home</a>
             <a href="#">How it works</a>
