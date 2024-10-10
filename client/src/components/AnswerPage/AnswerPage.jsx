@@ -2,7 +2,7 @@ import classes from "./css/postAnswer.module.css";
 import { IoArrowForwardCircle } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
-const PostAnswerPage = () => {
+const AnswerPage = () => {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,11 +15,11 @@ const PostAnswerPage = () => {
       <div className={classes.steps}>
         <h2>QUESTION</h2>
 
-        <div className={classes.flex_container} >
-        <div className={classes.icon_container}>
-              {" "}
-              <IoArrowForwardCircle color={"#516CEF"} size={34} />
-            </div>
+        <div className={classes.flex_container}>
+          <div className={classes.icon_container}>
+            {" "}
+            <IoArrowForwardCircle color={"#516CEF"} size={34} />
+          </div>
           <div>
             <div className={classes.title}>
               <h1>
@@ -33,9 +33,7 @@ const PostAnswerPage = () => {
               {/* content of the question goes here */}
               how does rendering work in react
             </div>
-           
           </div>
-        
         </div>
       </div>
       <hr />
@@ -52,4 +50,4 @@ const PostAnswerPage = () => {
   );
 };
 
-export default PostAnswerPage;
+export default AnswerPage;
