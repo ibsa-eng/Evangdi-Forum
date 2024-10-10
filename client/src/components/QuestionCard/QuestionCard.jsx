@@ -14,7 +14,7 @@ function QuestionCard({ question }) {
 
   return (
     <div
-      onClick={() => toAnswers(question?.id)}
+      onClick={() => toAnswers(question?.question_id)}
       key={question?.id}
       className={classes.question__container}
     >
