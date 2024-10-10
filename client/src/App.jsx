@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import {
   BrowserRouter as Router,
   Routes,
@@ -12,8 +12,8 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import LoginForm from "./pages/LoginForm/LoginForm";
 import RgisterForm from "./pages/RgisterForm/RgisterForm";
-import PostQuestionPage from "./components/postQestionPage/PostQuestionPage";
-import PostAnswerPage from "./components/postAnswerPage/PostAnswerPage";
+import AskQuestionPage from "./components/AskQestionPage/AskQuestionPage";
+import AnswerPage from "./components/AnswerPage/AnswerPage";
 
 const AuthWrapper = ({ setAuth }) => {
   const navigate = useNavigate();
@@ -71,8 +71,22 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/answer/:questionId" element={<PostAnswerPage />} />
-        <Route path="/question" element={<PostQuestionPage />} />
+        <Route
+          path="/ask"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <AskQuestionPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/answers/:id"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <AnswerPage />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
       <Footer />
     </div>
