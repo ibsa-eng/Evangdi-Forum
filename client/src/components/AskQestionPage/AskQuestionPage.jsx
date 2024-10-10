@@ -3,6 +3,7 @@ import classes from "./css/postPage.module.css";
 import { IoArrowForwardCircle } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../axios/axiosConfig";
+import { BeatLoader} from "react-spinners";
 
 const QuestionPage = () => {
   const token = localStorage.getItem("token");
@@ -80,7 +81,7 @@ const QuestionPage = () => {
           </ul>
         </div>
         <h3 className={classes.postTitle}>Post Your Question</h3>
-        {submission && <p className={classes.submission}>{submission}</p>}
+      
         <form onSubmit={handleSubmit}>
           <input
             type="text"

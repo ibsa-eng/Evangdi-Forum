@@ -9,6 +9,7 @@ const AnswerPage = () => {
   const [question, setQuestion] = useState(null);
   const navigate = useNavigate();
   const [answers, setAnswers] = useState([]);
+  const [spine, setSpine] = useState();
 
   const title = question?.title;
   const content = question?.content;
