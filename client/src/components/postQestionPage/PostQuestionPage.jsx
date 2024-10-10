@@ -22,7 +22,7 @@ const PostQuestionPage = () => {
     }
 
     try {
-      const { data } = await axiosInstance.post(
+      await axiosInstance.post(
         "/questions",
         {
           title,
@@ -49,59 +49,74 @@ const PostQuestionPage = () => {
   return (
     <div className={classes.outerContainer}>
       <div className={classes.postPageContainer}>
-      <div className={classes.steps}>
-        <h3>Steps To Write A Good Question.</h3>
-        <div className={classes.underline}></div>
-        <ul className={classes.stepsContainer}>
-          <li>
-            <span>
-              <IoArrowForwardCircle size={20} />
-            </span>{" "}
-            Summarize your problems in a one-line title.
-          </li>
-          <li>
-            <span>
-              <IoArrowForwardCircle size={20} />
-            </span>{" "}
-            Describe your problem in more detail.
-          </li>
-          <li>
-            <span>
-              <IoArrowForwardCircle size={20} />
-            </span>{" "}
-            Describe what you tried and what you expected to happen.
-          </li>
-          <li>
-            <span>
-              <IoArrowForwardCircle size={20} />
-            </span>{" "}
-            Review your question and post it here.
-          </li>
-        </ul>
+        <div className={classes.steps}>
+          <h3>Steps To Write A Good Question.</h3>
+          <div className={classes.underline}></div>
+          <ul className={classes.stepsContainer}>
+            <li>
+              <span>
+                <IoArrowForwardCircle size={20} />
+              </span>{" "}
+              Summarize your problems in a one-line title.
+            </li>
+            <li>
+              <span>
+                <IoArrowForwardCircle size={20} />
+              </span>{" "}
+              Describe your problem in more detail.
+            </li>
+            <li>
+              <span>
+                <IoArrowForwardCircle size={20} />
+              </span>{" "}
+              Describe what you tried and what you expected to happen.
+            </li>
+            <li>
+              <span>
+                <IoArrowForwardCircle size={20} />
+              </span>{" "}
+              Review your question and post it here.
+            </li>
+          </ul>
+        </div>
+        <h3 className={classes.postTitle}>Post Your Question</h3>
+        {submission && <p className={classes.submission}>{submission}</p>}
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            className={classes.title}
+            placeholder="Question title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+          <textarea
+            className={classes.textarea}
+            placeholder="Question detail ..."
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            required
+          />
+          <div className={classes.tagsContainer}>
+            <p>add a comma after each tag</p>
+            <div className={classes.tag_box}>
+              <ul>
+                <li> <i></i></li>
+                <li>  <i></i></li>
+                <input type="text" />
+              </ul>
+            </div>
+            <div>
+              <p><sp>10</sp></p>
+              <button>Remove all</button>
+            </div>
+          </div>
+
+          <button className={classes.button} type="submit">
+            Post Question
+          </button>
+        </form>
       </div>
-      <h3 className={classes.postTitle}>Post Your Question</h3>
-      {submission && <p className={classes.submission}>{submission}</p>}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          className={classes.title}
-          placeholder="Question title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <textarea
-          className={classes.textarea}
-          placeholder="Question detail ..."
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          required
-        />
-        <button className={classes.button} type="submit">
-          Post Question
-        </button>
-      </form>
-    </div>
     </div>
   );
 };

@@ -76,6 +76,7 @@ header {
   padding: 16px;
   width: 400px;
   transition: right 0.9s ease-out;
+  z-index: 10;
 }
 
 .header__dropdown.show {
