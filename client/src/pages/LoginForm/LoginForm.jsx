@@ -9,11 +9,11 @@ function LoginForm() {
   const navigate = useNavigate();
   const emailDom = useRef();
   const passwordDom = useRef();
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      navigate("/");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem("token")) {
+  //     navigate("/");
+  //   }
+  // }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
