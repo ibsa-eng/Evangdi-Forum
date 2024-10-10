@@ -14,13 +14,13 @@ const PostQuestionPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!token) {
       alert("You need to be logged in to post a question.");
       navigate("/login");
       return;
     }
-
+  
     try {
       await axiosInstance.post(
         "/questions",
@@ -34,17 +34,22 @@ const PostQuestionPage = () => {
           },
         }
       );
-      alert("questions posted successfully");
+  
       setSubmission(true);
       setTitle("");
       setContent("");
+      
 
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000); 
+  
     } catch (error) {
       console.error(error);
       alert("Failed to submit the question. Please try again.");
     }
   };
+  
 
   return (
     <div className={classes.outerContainer}>
@@ -80,7 +85,7 @@ const PostQuestionPage = () => {
           </ul>
         </div>
         <h3 className={classes.postTitle}>Post Your Question</h3>
-        {submission && <p className={classes.submission}>{submission}</p>}
+        {submission && <p className={classes.submission}>question posted successfully</p>}
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -97,20 +102,8 @@ const PostQuestionPage = () => {
             onChange={(e) => setContent(e.target.value)}
             required
           />
-          <div className={classes.tagsContainer}>
-            <p>add a comma after each tag</p>
-            <div className={classes.tag_box}>
-              <ul>
-                <li> <i></i></li>
-                <li>  <i></i></li>
-                <input type="text" />
-              </ul>
-            </div>
-            <div>
-              <p><sp>10</sp></p>
-              <button>Remove all</button>
-            </div>
-          </div>
+         
+
 
           <button className={classes.button} type="submit">
             Post Question

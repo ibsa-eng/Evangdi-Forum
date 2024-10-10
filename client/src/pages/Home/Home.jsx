@@ -76,8 +76,8 @@ function Home() {
       {filteredItems.length === 0 ? ( // Check if filtered items are available
         <p>No questions found.</p>
       ) : (
-        (filteredItems || questions).map((question) => (
-          <QuestionCard key={question.id} question={question} /> // Use unique key prop
+        (filteredItems || questions).slice().reverse().map((question) => (
+          <QuestionCard key={question.id} question={question} />
         ))
       )}
     </div>

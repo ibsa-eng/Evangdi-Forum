@@ -80,7 +80,7 @@ function App() {
           }
         />
         <Route
-          path="/answers/:id"
+          path="/answers/:question_id"
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <AnswerPage />
