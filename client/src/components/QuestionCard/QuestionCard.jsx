@@ -24,7 +24,7 @@ function QuestionCard({ question }) {
             {/* user icon */}
             <FontAwesomeIcon icon={faUser} />
           </div>
-          <div className={classes.user__email}>{question?.email}</div>
+          <div className={classes.user__email}>{question?.username}</div>
         </div>
         <div className={classes.user__question}>{question?.title}</div>
       </div>

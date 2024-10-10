@@ -21,7 +21,6 @@ function Home() {
         },
       });
       setQuestions(request.data);
-      setFilteredItems(request.data); // Initialize filtered items
     } catch (error) {
       alert("Something went wrong while fetching questions.");
       console.error("Error fetching data:", error);
