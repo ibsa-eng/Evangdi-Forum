@@ -61,7 +61,7 @@ const AnswerPage = () => {
     try {
       await axiosInstance.post(
         "/answer",
-        { answer, question_id },
+        { content: answer, question_id },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
