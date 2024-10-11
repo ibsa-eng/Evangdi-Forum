@@ -1,19 +1,28 @@
 import { useEffect, useState } from "react";
 import classes from "./css/postAnswer.module.css";
 import { IoArrowForwardCircle } from "react-icons/io5";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axiosInstance from "../../axios/axiosConfig";
 import AnswerCard from "../AnswerCard/AnswerCard";
+import { BeatLoader } from "react-spinners";
+
+const MAX_ANSWER_LENGTH = 500;
+
 const AnswerPage = () => {
   const { question_id } = useParams();
   const [question, setQuestion] = useState(null);
-  const navigate = useNavigate();
   const [answers, setAnswers] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [answer, setAnswer] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [posted, setPosted] = useState(false);
 
   const title = question?.title;
   const content = question?.content;
 
   const fetchData = async () => {
+    setError("");
     try {
       const response = await axiosInstance.get(`questions/${question_id}`, {
         headers: {
@@ -23,28 +32,33 @@ const AnswerPage = () => {
       setQuestion(response.data);
     } catch (error) {
       console.error("Error fetching the question:", error);
-      alert("Failed to load question. Please try again later.");
+      setError("Failed to load question. Please try again later.");
     }
-    try {
-      const response = await axiosInstance.get(
-        `answer/${question_id}`,
 
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+    try {
+      const response = await axiosInstance.get(`answer/${question_id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       setAnswers(response.data.answers);
     } catch (error) {
       console.error("Error fetching answers:", error);
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setError("");
+    if (answer.length == 0) {
+      setError("Please provide an answer before submitting.");
+      return;
+    }
+    setIsSubmitting(true);
+    setIsLoading(true);
+
     try {
-      const answer = e.target.answer.value;
       await axiosInstance.post(
         "/answer",
         { answer, question_id },
@@ -55,13 +69,19 @@ const AnswerPage = () => {
         }
       );
 
-    
       fetchData();
-
-      e.target.answer.value = "";
+      setAnswer("");
+      setIsSubmitting(false);
+      setIsLoading(false);
+      setPosted(true);
+      setTimeout(() => {
+        setPosted(false);
+      }, 800);
     } catch (error) {
-      alert("Something went wrong, please try again later");
       console.error(error);
+      setError("Failed to post your answer. Please try again.");
+      setIsSubmitting(false);
+      setIsLoading(false);
     }
   };
 
@@ -69,11 +89,15 @@ const AnswerPage = () => {
     fetchData();
   }, [question_id]);
 
+  const handleInputChange = (e) => {
+    setAnswer(e.target.value);
+    if (error) setError("");
+  };
+
   return (
     <div className={classes.postPageContainer}>
       <div className={classes.steps}>
         <h2>QUESTION</h2>
-
         <div className={classes.flex_container}>
           <div className={classes.icon_container}>
             <IoArrowForwardCircle color={"#516CEF"} size={34} />
@@ -82,7 +106,6 @@ const AnswerPage = () => {
             <div className={classes.title}>
               <h1>{title || "Loading..."}</h1>
             </div>
-
             <div className={classes.underline}></div>
             <div className={classes.content_container}>
               {content || "Loading..."}
@@ -93,19 +116,44 @@ const AnswerPage = () => {
       <hr />
       <h3 className={classes.postTitle}>Answer From The Community</h3>
       <hr />
+
       <div>
-        {answers?.map((answer) => <AnswerCard answer={answer} />) ||
-          "Loading..."}
+        {answers.length !== 0 ? (
+          answers.map((answer) => (
+            <AnswerCard key={answer.id} answer={answer} />
+          ))
+        ) : (
+          <div className={classes.noAnswer}>no answer yet.</div>
+        )}
+      </div>
+      {error && <div className={classes.errorAlert}>{error}</div>}
+      <div className={classes.spinner}>
+        {isLoading ? <BeatLoader color="orange" size={40} /> : ""}
+      </div>
+      <div>
+        {posted && (
+          <p className={classes.submissionAlert}>
+            question posted successfully
+          </p>
+        )}
       </div>
       <form onSubmit={handleSubmit}>
         <textarea
           name="answer"
           className={classes.textarea}
           placeholder="Your answer ..."
-          required
+          value={answer}
+          onChange={handleInputChange}
         />
-        <button className={classes.button} type="submit">
-          Post Answer
+        <div>
+          {answer.length}/{MAX_ANSWER_LENGTH} characters
+        </div>
+        <button
+          className={classes.button}
+          type="submit"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Posting..." : "Post Answer"}
         </button>
       </form>
     </div>

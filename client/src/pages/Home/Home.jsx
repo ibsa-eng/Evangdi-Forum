@@ -76,7 +76,7 @@ function Home() {
       {filteredItems.length === 0 ? ( // Check if filtered items are available
         <p>No questions found.</p>
       ) : (
-        (filteredItems || questions).slice().reverse().map((question) => (
+        (filteredItems || questions).map((question) => (
           <QuestionCard key={question.id} question={question} />
         ))
       )}
