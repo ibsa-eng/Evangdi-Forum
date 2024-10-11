@@ -14,6 +14,7 @@ import LoginForm from "./pages/LoginForm/LoginForm";
 import RgisterForm from "./pages/RgisterForm/RgisterForm";
 import AskQuestionPage from "./components/AskQestionPage/AskQuestionPage";
 import AnswerPage from "./components/AnswerPage/AnswerPage";
+import { EditProvider } from "./context/editContext";
 
 const AuthWrapper = ({ setAuth }) => {
   const navigate = useNavigate();
@@ -53,43 +54,45 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <Header />
-      {/* AuthWrapper handles token validation on page load */}
-      <AuthWrapper setAuth={setIsAuthenticated} />
+    <EditProvider>
+      <Router>
+        <Header />
+        {/* AuthWrapper handles token validation on page load */}
+        <AuthWrapper setAuth={setIsAuthenticated} />
 
-      <Routes>
-        {/* Public routes */}
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/register" element={<RgisterForm />} />
-        {/* Protected routes */}
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute isAuthenticated={isAuthenticated}>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/ask"
-          element={
-            <ProtectedRoute isAuthenticated={isAuthenticated}>
-              <AskQuestionPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/answers/:id"
-          element={
-            <ProtectedRoute isAuthenticated={isAuthenticated}>
-              <AnswerPage />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-      <Footer />
-    </Router>
+        <Routes>
+          {/* Public routes */}
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/register" element={<RgisterForm />} />
+          {/* Protected routes */}
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/ask"
+            element={
+              <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <AskQuestionPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/answers/:id"
+            element={
+              <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <AnswerPage />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+        <Footer />
+      </Router>
+    </EditProvider>
   );
 }
 
