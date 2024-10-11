@@ -9,6 +9,8 @@ function EditQuestionPopup({ onClose }) {
   const { question } = useContext(EditContext);
   const [title, setTitle] = useState(question.question.title);
   const [content, setContent] = useState(question.question.content);
+  const questionId = question.question.question_id;
+  const token = localStorage.getItem("token");
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -29,18 +31,29 @@ function EditQuestionPopup({ onClose }) {
       return;
     }
 
-    // try {
-    //   axiosInstance.post("/questions/question_id", {
-    //     // Use axiosInstance here
-    //     title,
-    //     content,
-    //   });
-    //   alert("Question updated Successfully!");
-    // } catch (error) {
-    //   alert("Something went wrong");
-    //   updateEditState(false);
-    //   console.log(error);
-    // }
+    try {
+      axiosInstance.patch(
+        `/questions/${questionId}`,
+        {
+          // This is the body of the request
+          title,
+          content,
+        },
+        {
+          // This is the config object for headers
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      alert("Question updated Successfully!");
+      updateEditState(false);
+    } catch (error) {
+      alert("Something went wrong");
+      updateEditState(false);
+      console.log(error);
+    }
     // Handle form submission here
     console.log("Updated Question:", { title, content });
     updateEditState(false);
