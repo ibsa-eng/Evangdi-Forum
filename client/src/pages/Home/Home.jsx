@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import QuestionCard from "../../components/QuestionCard/QuestionCard";
 import { useNavigate } from "react-router-dom";
 import classes from "./Home.module.css";
 import axiosInstance from "../../axios/axiosConfig";
+import EditContext from "../../context/EditContext";
+import EditQuestionPopup from "../../components/EditQuestion/EditQuestionPopup";
+// import EditQuestionPopup from "../../components/EditQuestion/EditQuestionPopup";
 
 function Home() {
   const [questions, setQuestions] = useState([]);
@@ -11,6 +14,7 @@ function Home() {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
+  const { edit, updateEditState } = useContext(EditContext);
 
   const getQuestion = async () => {
     try {
@@ -72,14 +76,14 @@ function Home() {
           placeholder="Search questions"
         />
       </div>
-
       {filteredItems.length === 0 ? ( // Check if filtered items are available
         <p>No questions found.</p>
       ) : (
         (filteredItems || questions).map((question) => (
-          <QuestionCard key={question.id} question={question} />
+          <QuestionCard key={question.question_id} question={question} /> // Use unique key prop
         ))
       )}
+      {edit && <EditQuestionPopup onClose={() => updateEditState(false)} />}
     </div>
   );
 }
