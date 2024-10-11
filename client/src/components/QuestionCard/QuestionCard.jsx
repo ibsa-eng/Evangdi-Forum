@@ -5,16 +5,17 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
-import EditContext from "../../context/editContext";
+import EditContext from "../../context/EditContext";
 
 function QuestionCard({ question }) {
-  const { updateState } = useContext(EditContext);
+  const { updateEditState, updateQuestion } = useContext(EditContext);
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
 
   const handleEditClick = (e) => {
     e.stopPropagation();
-    updateState(true);
+    updateEditState(true);
+    updateQuestion({question});
   };
 
   const toAnswers = (id) => {

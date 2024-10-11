@@ -1,8 +1,52 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { X } from "lucide-react";
 import classes from "./EditQuestionPopup.module.css"; // Import custom CSS file
+import EditContext from "../../context/EditContext";
+import axiosInstance from "../../axios/axiosConfig";
 
 function EditQuestionPopup({ onClose }) {
+  const { updateEditState } = useContext(EditContext);
+  const { question } = useContext(EditContext);
+  const [title, setTitle] = useState(question.question.title);
+  const [content, setContent] = useState(question.question.content);
+
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const handleContentChange = (event) => {
+    setContent(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // Check if both title and content are unchanged
+    if (
+      question.question.title === title &&
+      question.question.content === content
+    ) {
+      alert("No changes detected. Please update either the title or content.");
+      return;
+    }
+
+    // try {
+    //   axiosInstance.post("/questions/question_id", {
+    //     // Use axiosInstance here
+    //     title,
+    //     content,
+    //   });
+    //   alert("Question updated Successfully!");
+    // } catch (error) {
+    //   alert("Something went wrong");
+    //   updateEditState(false);
+    //   console.log(error);
+    // }
+    // Handle form submission here
+    console.log("Updated Question:", { title, content });
+    updateEditState(false);
+    // You may also want to call a function to save these changes or update your context
+  };
+
   return (
     <div className={classes.popup__overlay}>
       <div className={classes.popup__container}>
@@ -12,17 +56,27 @@ function EditQuestionPopup({ onClose }) {
         <div className={classes.popup__content}>
           <div className={classes.question__section}>
             <h2>Edit your question</h2>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className={classes.question__title}>
-                <label for="name">Question title</label> <br />
+                <label htmlFor="name">Question title</label> <br />
                 <hr />
-                <textarea id="message"></textarea>
+                <textarea
+                  id="title"
+                  value={title}
+                  onChange={handleTitleChange}
+                />
               </div>
               <div className={classes.post__answer__section}>
-                <label for="email">Description</label>
+                <label htmlFor="email"></label>
                 <hr />
-                <textarea></textarea>
-                <button className={classes.post__button}>Edit</button>
+                <textarea
+                  id="content"
+                  value={content}
+                  onChange={handleContentChange}
+                />
+                <button type="submit" className={classes.post__button}>
+                  Edit
+                </button>
               </div>
             </form>
           </div>

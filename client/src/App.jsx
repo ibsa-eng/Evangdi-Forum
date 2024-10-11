@@ -14,7 +14,7 @@ import LoginForm from "./pages/LoginForm/LoginForm";
 import RgisterForm from "./pages/RgisterForm/RgisterForm";
 import AskQuestionPage from "./components/AskQestionPage/AskQuestionPage";
 import AnswerPage from "./components/AnswerPage/AnswerPage";
-import { EditProvider } from "./context/editContext";
+import { EditProvider } from "./context/EditContext";
 
 const AuthWrapper = ({ setAuth }) => {
   const navigate = useNavigate();
