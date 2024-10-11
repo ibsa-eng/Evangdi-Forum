@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import classes from "./Header.module.css";
 import headerLogo from "../../assets/evangadi.png";
 import { useNavigate, Link } from "react-router-dom";
@@ -33,7 +33,7 @@ function Header() {
               Log Out
             </div>
           ) : (
-            <div className={classes.join_btn}>Sign In</div>
+            <Link to={"/login"} className={classes.join_btn}>Sign In</Link>
           )}
         </div>
         <HiOutlineMenu
@@ -59,12 +59,14 @@ function Header() {
             <a href="#">Home</a>
             <a href="#">How it works</a>
             {userExist ? (
-            <div className={classes.log__out} onClick={handleLogout}>
-              Log Out
-            </div>
-          ) : (
-            <div className={classes.join_btn_brop}>Sign In</div>
-          )}
+              <div className={classes.log__out} onClick={handleLogout}>
+                Log Out
+              </div>
+            ) : (
+              <Link to="/login" className={classes.join_btn_brop}>
+                Sign In
+              </Link>
+            )}
           </div>
         </div>
       </div>
