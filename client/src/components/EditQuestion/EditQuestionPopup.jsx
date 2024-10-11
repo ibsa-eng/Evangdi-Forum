@@ -49,6 +49,7 @@ function EditQuestionPopup({ onClose }) {
       );
       alert("Question updated Successfully!");
       updateEditState(false);
+      window.location.href = window.location.href;
     } catch (error) {
       alert("Something went wrong");
       updateEditState(false);
