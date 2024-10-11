@@ -87,3 +87,30 @@
   cursor: pointer;
   border-radius: 8px;
 }
+
+.spinner{
+
+  padding: 10px;
+  color: green;
+  font-weight: bold;
+  font-size: 1.8vh;
+  font-style: 20px arial;
+  margin: 10px auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.submissionAlert{
+  display: flex;
+  
+}
+.errorAlert{
+  text-align: center;
+  color: red;
+  margin: 10px;
+}

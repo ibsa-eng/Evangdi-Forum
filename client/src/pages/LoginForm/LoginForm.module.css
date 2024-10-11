@@ -3,7 +3,8 @@
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  width: 48.5%;
+  /* width: 48.5%; */
+  width: 90%;
   background-color: white;
   text-align: center;
   padding: 40px;
@@ -63,4 +64,10 @@ button:hover {
   margin: 20px 0;
   text-align: right;
   font-size: 18px;
+}
+
+@media (min-width: 768px) {
+  .login__form__container{
+    width: 48.5%;
+  }
 }
